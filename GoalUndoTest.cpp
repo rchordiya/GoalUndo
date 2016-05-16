@@ -87,3 +87,45 @@ TEST(GoalUndoTest,addOperationwith_bothStringsValid)
   x.addOperation(str3,str1);
   ASSERT_EQ(str1,x.getOperations());
 }
+
+TEST(GoalUndoTest,getOperationSingleOpsreturned)
+{
+  GoalUndo x;
+  string str="Job";
+  string str1="Hard work";
+	x.addOperation(str,str1);
+  ASSERT_EQ(str1,x.getOperations());
+}
+
+TEST(GoalUndoTest,getOperationTwoOpsreturned)
+{
+  GoalUndo x;
+  string str="Job";
+  string str1="Hard work";
+  string str2="Passion";
+  string str3="Hard work Passion";
+	x.addOperation(str,str1);
+  x.addOperation(str2);
+  ASSERT_EQ(str3,x.getOperations());
+}
+
+TEST(GoalUndoTest,getOperationTwoOpsreturnedwithSpaceslast)
+{
+  GoalUndo x;
+  string str="Job";
+  string str1="Hard work";
+  string str2="Passion";
+  string str3="Hard work Passion ";
+	x.addOperation(str,str1);
+  x.addOperation(str2);
+  ASSERT_NE(str3,x.getOperations());
+}
+
+TEST(GoalUndoTest,getOperationemptyreturned)
+{
+  GoalUndo x;
+  string str="";
+  string str1="";
+	x.addOperation(str,str1);
+  ASSERT_EQ(str1,x.getOperations());
+}
