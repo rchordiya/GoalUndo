@@ -267,3 +267,55 @@ TEST(GoalUndoTest,undoOps_multipleGoalsmultipleOps)
   string c="Hardwork Passion";
   ASSERT_EQ(c,x.getOperations());
 }
+
+TEST(GoalUndoTest,undoGoalSinglegoalSingleOps)
+{
+  GoalUndo x;
+  string str="Job";
+  string str1="Hardwork";
+  x.addOperation(str,str1);
+  x.undoGoal();
+  string c="";
+  ASSERT_EQ(c,x.getGoal());
+  ASSERT_EQ(c,x.getOperations());
+}
+
+TEST(GoalUndoTest,undoGoalEmptyGoal)
+{
+  GoalUndo x;
+  x.undoGoal();
+  string c="";
+  ASSERT_EQ(c,x.getGoal());
+
+}
+
+TEST(GoalUndoTest,undoGoalSingleGoalMultipleOps)
+{
+  GoalUndo x;
+  string str="Job";
+  string str1="Hardwork";
+  string str2="Passion";
+  string str3="Dedication";
+  x.addOperation(str,str1);
+  x.addOperation(str2);
+  x.addOperation(str3);
+  x.undoGoal();
+  string c="";
+  ASSERT_EQ(c,x.getOperations());
+
+}
+
+TEST(GoalUndoTest,undoGoalMultipleGoals)
+{
+  GoalUndo x;
+  string str="Job";
+  string str1="Hardwork";
+  string str2="Passion";
+  string str3="Dedication";
+  x.addOperation(str,str1);
+  x.addOperation(str2,str3);
+  x.undoGoal();
+  string c="Hardwork";
+  ASSERT_EQ(c,x.getOperations());
+
+}
