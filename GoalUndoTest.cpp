@@ -129,3 +129,25 @@ TEST(GoalUndoTest,getOperationemptyreturned)
 	x.addOperation(str,str1);
   ASSERT_EQ(str1,x.getOperations());
 }
+
+TEST(GoalUndoTest,getGoalnogoalsadded)
+{
+  GoalUndo x;
+  string str="";
+  ASSERT_EQ(str,x.getGoal());
+}
+
+TEST(GoalUndoTest,getGoalrecentlyAdded)
+{
+  GoalUndo x;
+  string str="Job";
+  string str1="Hardwork";
+  string str2="Business";
+  string str3="Passion";
+  string str4="";
+  string str5="Support";
+  x.addOperation(str,str1);
+  x.addOperation(str2,str3);
+  x.addOperation(str4,str5);
+  ASSERT_EQ(str2,x.getGoal());
+}
