@@ -151,3 +151,65 @@ TEST(GoalUndoTest,getGoalrecentlyAdded)
   x.addOperation(str4,str5);
   ASSERT_EQ(str2,x.getGoal());
 }
+
+//Doubt test case
+TEST(GoalUndoTest,overloadedundoOpsGoalstatus)
+{
+  GoalUndo x;
+  string str="Job";
+  string str1="Hardwork";
+  string str2="Business";
+  string str3="Passion";
+  string str4="politics";
+  string str5="Support";
+  string str6="";
+  x.addOperation(str,str1);
+  x.addOperation(str2,str3);
+  x.addOperation(str4,str5);
+  x.undoOperation(str5);
+  ASSERT_EQ(str6,x.getGoal());
+
+}
+
+TEST(GoalUndoTest,overloaadedundoOpsOperationstatusSinlgeGoal)
+{
+  GoalUndo x;
+  string str="Job";
+  string str1="Hardwork";
+  string str3="Passion";
+  string str5="Support";
+  string str6="";
+  x.addOperation(str,str1);
+  x.addOperation(str3);
+  x.addOperation(str5);
+  x.undoOperation(str5);
+  string c="Hardwork Passion";
+  ASSERT_EQ(c,x.getOperations());
+
+}
+
+TEST(GoalUndoTest,overloaadedundoOpsOperationnotfound)
+{
+  GoalUndo x;
+  string str="Job";
+  string str1="Hardwork";
+  string str3="Passion";
+  string str5="Support";
+  string str6="Dedication";
+  x.addOperation(str,str1);
+  x.addOperation(str3);
+  x.addOperation(str5);
+  x.undoOperation(str6);
+  string c="Hardwork Passion Support";
+  ASSERT_EQ(c,x.getOperations());
+
+}
+TEST(GoalUndoTest,overloaadedundoOpsnoGoals)
+{
+  GoalUndo x;
+  string str="Job";
+  x.undoOperation(str);
+  string c="";
+  ASSERT_EQ(c,x.getGoal());
+
+}
