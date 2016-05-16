@@ -153,7 +153,7 @@ TEST(GoalUndoTest,getGoalrecentlyAdded)
 }
 
 //Doubt test case
-TEST(GoalUndoTest,overloadedundoOpsGoalstatus)
+TEST(GoalUndoTest,overloadedundoOps_Goalstatus)
 {
   GoalUndo x;
   string str="Job";
@@ -171,7 +171,7 @@ TEST(GoalUndoTest,overloadedundoOpsGoalstatus)
 
 }
 
-TEST(GoalUndoTest,overloaadedundoOpsOperationstatusSinlgeGoal)
+TEST(GoalUndoTest,overloaadedundoOps_OperationstatusSinlgeGoal)
 {
   GoalUndo x;
   string str="Job";
@@ -188,7 +188,7 @@ TEST(GoalUndoTest,overloaadedundoOpsOperationstatusSinlgeGoal)
 
 }
 
-TEST(GoalUndoTest,overloaadedundoOpsOperationnotfound)
+TEST(GoalUndoTest,overloaadedundoOps_Operationnotfound)
 {
   GoalUndo x;
   string str="Job";
@@ -204,7 +204,7 @@ TEST(GoalUndoTest,overloaadedundoOpsOperationnotfound)
   ASSERT_EQ(c,x.getOperations());
 
 }
-TEST(GoalUndoTest,overloaadedundoOpsnoGoals)
+TEST(GoalUndoTest,overloaadedundoOps_noGoals)
 {
   GoalUndo x;
   string str="Job";
@@ -212,4 +212,58 @@ TEST(GoalUndoTest,overloaadedundoOpsnoGoals)
   string c="";
   ASSERT_EQ(c,x.getGoal());
 
+}
+
+TEST(GoalUndoTest,undoOpsnoGoals)
+{
+  GoalUndo x;
+  x.undoOperation();
+  string c="";
+  ASSERT_EQ(c,x.getGoal());
+}
+
+TEST(GoalUndoTest,undoOps_singleGoalsingleOps)
+{
+  GoalUndo x;
+  string str="Job";
+  string str1="Hardwork";
+  x.addOperation(str,str1);
+  x.undoOperation();
+  string c="";
+  ASSERT_EQ(c,x.getGoal());
+}
+
+TEST(GoalUndoTest,undoOps_singleGoalmultipleOps)
+{
+  GoalUndo x;
+  string str="Job";
+  string str1="Hardwork";
+  string str2="Dedication";
+  string str3="Passion";
+  x.addOperation(str,str1);
+  x.addOperation(str2);
+  x.addOperation(str3);
+  x.undoOperation();
+  x.undoOperation();
+  string c="Hardwork";
+  ASSERT_EQ(c,x.getOperations());
+}
+
+TEST(GoalUndoTest,undoOps_multipleGoalsmultipleOps)
+{
+  GoalUndo x;
+  string str="Job";
+  string s="Business";
+  string str1="Hardwork";
+  string str2="Dedication";
+  string str3="Passion";
+  string str4="Punctual";
+  x.addOperation(str,str1);
+  x.addOperation(str3);
+  x.addOperation(s,str2);
+  x.addOperation(str4);
+  x.undoOperation();
+  x.undoOperation();
+  string c="Hardwork Passion";
+  ASSERT_EQ(c,x.getOperations());
 }
