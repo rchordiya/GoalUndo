@@ -301,6 +301,7 @@ TEST(GoalUndoTest,undoGoalSingleGoalMultipleOps)
   x.addOperation(str3);
   x.undoGoal();
   string c="";
+	string d="";
   ASSERT_EQ(c,x.getOperations());
 
 }
